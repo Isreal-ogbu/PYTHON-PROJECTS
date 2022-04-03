@@ -1,4 +1,4 @@
-this project was carried out to determine the strength of a password entered by a user.
+This project was carried out to determine the strength of a password entered by a user.
 
 The strength is judged based on the type of character entered by the user.
 
