@@ -1,3 +1,8 @@
+class node:
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next_node = next_node
+
 class circular_linkedlist:
     def __init__(self, root=None):
         self.root = root
@@ -44,10 +49,10 @@ class circular_linkedlist:
         if self.root is None:
             return
         this_node = self.root
-        print(this_node, end='->')
+        print(this_node.data, end='->')
         while this_node.next_node != self.root:
             this_node = this_node.next_node
-            print(this_node, end='->')
+            print(this_node.data, end='->')
         print()
 
 
