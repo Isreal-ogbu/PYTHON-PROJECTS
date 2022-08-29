@@ -57,11 +57,84 @@ def max_sum_of_k(nums, k):
     if len(nums) == k:
         return sum(nums)
     maxi = 0
-    for i in range(len(nums)):
+    for i in range(len(nums)-k+1):
         maxi = max(sum(nums[i:k + i]), maxi)
     return maxi
 
 
 print(max_sum_of_k([1, 4, 2, 10, 2, 3, 1, 0, 20], 4))
 print(max_sum_of_k([5, 2, -1, 0, 3], 3))
+
+# Anagram substring search (Less Efficient)
+
+def anagram_subtring(nums, com):
+    table = dict()
+    for i in com:
+        if i in table:
+            table[i] += 1
+        else:
+            table[i] = 1
+    siz = len(com)
+    count = 0
+    for p in range(len(nums)-siz+1):
+        val = nums[p:siz + p]
+        tab = table.copy()
+        for i in val:
+            if i in tab.keys():
+                if i in tab:
+                    tab[i] -= 1
+                if tab[i] == 0:
+                    del tab[i]
+                if len(tab) == 0:
+                    count += 1
+            else:
+                break
+    return count
+
+
+print(anagram_subtring("forxxorfxdofr", "for"))
+
+# Anagram substring (Efficint solution)
+
+def anagram_substring(nums, num):
+    s, p = len(nums), len(num)
+    arr = []
+    if s < p or p == 0:
+        return
+    hs, hp = [0 for _ in range(26)], [0 for _ in range(26)]
+    for i in num:
+        hp[ord(i) - ord('A')] += 1
+    for i in range(0, p):
+        hs[ord(nums[i]) - ord('A')] += 1
+
+    flag = True
+
+    for i in range(0, 26):
+        if hp[i] != hs[i]:
+            flag = False
+
+    if flag:
+        arr.append(0)
+
+    for i in range(p, s):
+        hs[ord(nums[i - p]) - ord('A')] -= 1
+        hs[ord(nums[i]) - ord('A')] += 1
+
+        if hs[ord(nums[i]) - ord('A')] == hp[ord(nums[i]) - ord('A')] and hs[ord(nums[i - p]) - ord('A')] == hp[
+            ord(nums[i - p]) - ord("A")]:
+            flag = True
+            for j in range(0, 26):
+                if hs[j] != hp[j]:
+                    flag = False
+
+        else:
+            flag = False
+
+        if flag:
+            arr.append(i - p + 1)
+    return arr
+
+
+print(anagram_substring("BACDGABCDA", "ABCD"))
+
 
