@@ -49,3 +49,19 @@ sum_prefix_2D([[2, 1, 1, 1, 1],
                [1, 2, 1, 1, 1],
                [1, 1, 2, 1, 1],
                [1, 1, 1, 2, 1]])
+
+# maximium sum of k in a string or list
+def max_sum_of_k(nums, k):
+    if len(nums) < k:
+        return None
+    if len(nums) == k:
+        return sum(nums)
+    maxi = 0
+    for i in range(len(nums)):
+        maxi = max(sum(nums[i:k + i]), maxi)
+    return maxi
+
+
+print(max_sum_of_k([1, 4, 2, 10, 2, 3, 1, 0, 20], 4))
+print(max_sum_of_k([5, 2, -1, 0, 3], 3))
+
