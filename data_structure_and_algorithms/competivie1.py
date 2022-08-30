@@ -174,3 +174,25 @@ def max_sum(arr, k):
 
 
 print(max_sum([1, 2, 18, 3, 4, 5, 9], 2))
+
+# sum prime factors of a numbers
+
+import math as m
+
+
+def sum_prime_factors(n):
+    res = 1
+    for i in range(2, int(m.sqrt(n)) + 1):
+        cur_num = 1
+        cur_sum = 1
+        while n % i == 0:
+            n = n / i
+            cur_num = cur_num * i
+            cur_sum += cur_num
+        res = res * cur_sum
+    if n > 2:
+        res = res * (res * n)
+    return res
+
+
+print(sum_prime_factors(4))
