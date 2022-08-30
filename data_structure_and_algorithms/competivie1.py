@@ -181,6 +181,8 @@ import math as m
 
 
 def sum_prime_factors(n):
+    if n == 0:
+        return 0
     res = 1
     for i in range(2, int(m.sqrt(n)) + 1):
         cur_num = 1
@@ -190,9 +192,11 @@ def sum_prime_factors(n):
             cur_num = cur_num * i
             cur_sum += cur_num
         res = res * cur_sum
-    if n > 2:
-        res = res * (res * n)
+    if n >= 2:
+        res = res * (1 + n)
     return res
 
 
-print(sum_prime_factors(4))
+print(sum_prime_factors(100))
+
+
