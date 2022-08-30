@@ -137,4 +137,40 @@ def anagram_substring(nums, num):
 
 print(anagram_substring("BACDGABCDA", "ABCD"))
 
+# Prime numbers of lower strictly lower than a particular number (using sieve of erathurmus)
 
+def prime_numbers(n):
+    if 0 <= n <= 2 :
+        return 0
+    if n == 3:
+        return 1
+    arr = [0 for _ in range(n)]
+    arr[1] = 1
+    for i in range(n):
+        if arr[i] ==  0:
+            arr[i] = i
+            for j in range(i*i, n, i):
+                if arr[j] == 0:
+                    arr[j] = i
+    
+    return len(set(arr)) - 2
+
+# sliding Window : very useful for finding subarray question.
+
+def max_sum(arr, k):
+    if len(arr) < k or k == 0:
+        return
+
+    if len(arr) == k:
+        return sum(arr)
+
+    n = len(arr)
+    max_len = sum(arr[:k])
+    max_sum = 0
+    for i in range(n - k):
+        max_len = max_len - arr[i] + arr[k + i]
+        max_sum = max(max_sum, max_len)
+    return max_sum
+
+
+print(max_sum([1, 2, 18, 3, 4, 5, 9], 2))
