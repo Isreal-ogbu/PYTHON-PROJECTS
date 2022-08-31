@@ -198,5 +198,3 @@ def sum_prime_factors(n):
 
 
 print(sum_prime_factors(100))
-
-

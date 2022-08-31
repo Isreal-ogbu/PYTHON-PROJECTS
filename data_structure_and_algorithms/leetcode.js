@@ -1,3 +1,5 @@
+// practise question
+
 var countSubIslands = function(grid1, grid2) {
     
     // grid1[r][c] and grid2[r][c] both same and 0 return 1
