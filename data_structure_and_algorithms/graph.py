@@ -124,4 +124,13 @@ def helper(nums):
     for i in range(1, len(nums)):
         test.add_val(nums[i])
     return test
-    
+
+if __name__ == '__main__':
+    values = [1, 3, 5, 21, 1, 5, 8, 3, 5, 5, 90, 45, 2]
+    test = helper(values)
+    print(test.inorder())
+    print(test.preorder())
+    print(test.getsize())
+    print(test.search(90))
+    print(test.min_value())
+    print(test.max_value())
