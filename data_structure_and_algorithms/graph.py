@@ -134,3 +134,18 @@ if __name__ == '__main__':
     print(test.search(90))
     print(test.min_value())
     print(test.max_value())
+
+# rotate an image (leetcode)
+
+def rotate(matrix):
+    matric = matrix.copy()
+    for i in range(len(matric)):
+        arr1 = []
+        for j in range(len(matric)):
+            arr1.append(matric[j][i])
+        matrix[i] = arr1[::-1]
+    return matrix
+
+
+print(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
