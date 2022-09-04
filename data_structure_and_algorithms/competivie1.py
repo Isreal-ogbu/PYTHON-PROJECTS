@@ -198,3 +198,17 @@ def sum_prime_factors(n):
 
 
 print(sum_prime_factors(100))
+
+# working with 2D question - Rotate an Image using its coordinate
+
+def rotate(matrix):
+    matric = matrix.copy()
+    for i in range(len(matric)):
+        arr1 = []
+        for j in range(len(matric)):
+            arr1.append(matric[j][i])
+        matrix[i] = arr1[::-1]
+    return matrix
+
+
+print(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
