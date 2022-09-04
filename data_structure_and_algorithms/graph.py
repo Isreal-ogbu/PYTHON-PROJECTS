@@ -149,3 +149,34 @@ def rotate(matrix):
 
 print(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
 
+
+# Topological sorting 
+
+def toposort(data):
+    visited = [False for _ in range(len(data))]
+    arr = list()
+
+    def toposortdfs(data, i, visited, arr):
+
+        visited[i] = True
+
+        for j in data[i]:
+            if not visited[j]:
+                toposortdfs(data, j, visited, arr)
+
+        arr.append(i)
+
+    for i in range(len(data)):
+        if not visited[i]:
+            toposortdfs(data, i, visited, arr)
+
+    print(arr[::-1])
+
+
+if __name__ == '__main__':
+    data = {
+        5: {2, 0}, 4: {1, 0}, 2: {3}, 3: {1}, 1: {},
+        0: {}
+    }
+
+    toposort(data)
