@@ -212,3 +212,33 @@ def rotate(matrix):
 
 
 print(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+
+# Using a graph to find path between to node
+
+
+def bfs(data, start, end, visited=None):
+    if visited is None:
+        visited = set()
+
+    queue = [start]
+
+    while queue:
+        y = queue.pop(0)
+        if y not in visited:
+            print(y, end=" ")
+            if y == end:
+                break
+        visited.add(y)
+        for i in data[y]:
+            if i not in visited:
+                queue.append(i)
+
+
+if __name__ == '__main__':
+    data = {
+        'A': {'B'}, 'B': {'A', 'C', 'D'}, 'C': {'B', 'E'}, 'D': {'B', 'E'},
+        'E': {'C', 'D', 'F'}, 'F': {'E'}
+    }
+
+    bfs(data, 'A', 'F')
