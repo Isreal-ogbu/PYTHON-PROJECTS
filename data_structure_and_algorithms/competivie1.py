@@ -242,3 +242,81 @@ if __name__ == '__main__':
     }
 
     bfs(data, 'A', 'F')
+
+
+import collections
+
+
+# bfs implementation to detect cycle in graph, also to print topo sorted array
+def toposort_cycle(edge):
+    edges = collections.defaultdict(list)
+
+    def vertex(u, v):
+        edges[u].append(v)
+
+    for x, y in edge:
+        vertex(x, y)
+
+    lent = [0 for _ in range(len(edge))]
+    for i in edges:
+        for j in edges[i]:
+            lent[j] += 1
+    queue = list()
+    for i in range(len(edge)):
+        if lent[i] == 0:
+            queue.append(i)
+    count = 0
+    store = []
+    while queue:
+        y = queue.pop(0)
+        store.append(y)
+
+        for i in edges[y]:
+            lent[i] -= 1
+            if lent[i] == 0:
+                queue.append(i)
+        count += 1
+    if count != len(edges):
+        return "Yes"
+    else:
+        return store
+
+
+if __name__ == '__main__':
+    # data = {5: {2, 0}, 4: {1, 0}, 2: {3}, 3: {1}, 1: {}, 0: {}}
+
+    data = [[5, 2], [5, 0], [4, 1], [4, 0], [2, 3], [3, 1]]
+
+    print(toposort_cycle(data))
+
+
+# TOPOGRAPHY SORTING
+
+def toposort(data):
+    visited = [False for _ in range(len(data))]
+    arr = list()
+
+    def toposortdfs(data, i, visited, arr):
+
+        visited[i] = True
+
+        for j in data[i]:
+            if not visited[j]:
+                toposortdfs(data, j, visited, arr)
+
+        arr.append(i)
+
+    for i in range(len(data)):
+        if not visited[i]:
+            toposortdfs(data, i, visited, arr)
+
+    return arr[::-1]
+
+
+if __name__ == '__main__':
+    data = {
+        5: {2, 0}, 4: {1, 0}, 2: {3}, 3: {1}, 1: {},
+        0: {}
+    }
+
+    print(toposort(data))
