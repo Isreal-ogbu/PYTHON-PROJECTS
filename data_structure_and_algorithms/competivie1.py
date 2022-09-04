@@ -137,7 +137,7 @@ def anagram_substring(nums, num):
 
 print(anagram_substring("BACDGABCDA", "ABCD"))
 
-# Prime numbers of lower strictly lower than a particular number (using sieve of erathurmus)
+# Prime numbers strictly lower than a particular number (using sieve of erathurmus)
 
 def prime_numbers(n):
     if 0 <= n <= 2 :
