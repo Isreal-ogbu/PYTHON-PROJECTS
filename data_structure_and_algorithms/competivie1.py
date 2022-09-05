@@ -269,6 +269,7 @@ import collections
 
 
 def toposort_cycle(edge):
+    size = len(edge)
     edges = collections.defaultdict(list)
 
     def vertex(u, v):
@@ -277,28 +278,43 @@ def toposort_cycle(edge):
     for x, y in edge:
         vertex(x, y)
 
-    lent = [0 for _ in range(len(edge))]
+    # Initialize all degrees of edges by 0's
+    lent = [0 for _ in range(size)]
+
+    # Tranverse the adjacency list to fill all the degrees (lent)
     for i in edges:
         for j in edges[i]:
             lent[j] += 1
+
+    # create a queue and enqueue (append) all the degress(lent) with value zero
     queue = list()
-    for i in range(len(edge)):
+    for i in range(size):
         if lent[i] == 0:
             queue.append(i)
+
+    # Initialise count to of visited vertices
     count = 0
-    store = []
+    store = [] # create an array to store visted node
+
+    # one by one dequeue and enqueue if adjancency of degree is 0
     while queue:
-        y = queue.pop(0)
+        y = queue.pop(0) #popleft and get the value and add it to the topological order
         store.append(y)
 
+        #Iterate through all the node of the poped value and decrease them by 1
         for i in edges[y]:
             lent[i] -= 1
+
+            # decease them by one and append or enqueue them to the queue
             if lent[i] == 0:
                 queue.append(i)
         count += 1
+
+    #check if there was a cycle
     if count != len(edges):
         return "Yes"
     else:
+        # print the topological arr of values 
         return store
 
 
@@ -310,7 +326,7 @@ if __name__ == '__main__':
     print(toposort_cycle(data))
 
 
-# TOPOGRAPHY SORTING
+# TOPOGRAPHY SORTING method i
 
 def toposort(data):
     visited = [False for _ in range(len(data))]
@@ -340,3 +356,42 @@ if __name__ == '__main__':
     }
 
     print(toposort(data))
+
+
+# Topolocical order- Method2
+
+import collections
+
+
+def toposot(grap):
+    graph = collections.defaultdict(list)
+
+    def add(u, v):
+        graph[u].append(v)
+
+    for i, j in grap:
+        add(i, j)
+
+    visited = [False for _ in range(len(grap))]
+
+    def toposortutil(graph, i, visited, arr):
+        visited[i] = True
+        for j in graph[i]:
+            if not visited[j]:
+                toposortutil(graph, j, visited, arr)
+
+        arr.append(i)
+
+    arr = []
+    for i in range(len(grap)):
+        if not visited[i]:
+            toposortutil(graph, i, visited, arr)
+
+    return arr[::-1]
+
+
+if __name__ == '__main__':
+    # data = {5: {2, 0}, 4: {1, 0}, 2: {3}, 3: {1}, 1: {}, 0: {}}
+
+    data = [[5, 2], [5, 0], [4, 1], [4, 0], [2, 3], [3, 1]]
+    print(toposot(data))
