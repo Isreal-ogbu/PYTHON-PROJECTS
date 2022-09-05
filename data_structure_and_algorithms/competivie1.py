@@ -244,7 +244,7 @@ if __name__ == '__main__':
     bfs(data, 'A', 'F')
 
 
-import collections
+
 
 
 # bfs implementation to detect cycle in graph, also to print topo sorted array (khan's Alogorithms)
@@ -265,6 +265,8 @@ if graph has edges then
 else 
     return L   (a topologically sorted order)
 """
+import collections
+
 
 def toposort_cycle(edge):
     edges = collections.defaultdict(list)
