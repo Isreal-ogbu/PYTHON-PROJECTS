@@ -1,6 +1,6 @@
 # Depth forst seach and breadth first of a graph.
 
-def dfs(graph, start, stop, visited=None):
+def dfs(graph, start, visited=None):
     # This checks if the visited node is empty
     if visited is None:
         visited = set()
@@ -11,7 +11,7 @@ def dfs(graph, start, stop, visited=None):
     
     # I terare through the unvisited node and perform a reculsive call on each node till the end
     for next in graph[start] - visited:
-        dfs(graph, next, stop, visited)
+        dfs(graph, next, visited)
     return 
 
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
         'E': {'C', 'D', 'F'}, 'F': {'E'}
     }
     
-    dfs(data, "A", "F")
+    dfs(data, "A")
     print('')
     bfs(data, "A")
 
